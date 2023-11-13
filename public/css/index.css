@@ -1,0 +1,20 @@
+.btn btn-primary{
+    /* パディング(余白)上下方向 左右方向 */
+    padding: 100px 100px;
+    /* ボタンの幅 */
+    width: 500px;
+    /* 背景色 青 */
+    background-color: red;
+    /* フォント色 白 */
+    color: white;
+    /* テキスト中央揃え */
+    text-align: center;
+    /* フォントを太く */
+    font-weight: bold;
+    /* ボタンの角を丸める */
+    border-radius: 5px;
+     /* 上下左右方向の余白外側30px */
+     margin: 30px;
+     /* ボタンの影 */
+     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 30%);
+   }
