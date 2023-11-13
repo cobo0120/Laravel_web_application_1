@@ -1,18 +1,13 @@
-
-
-  $(function() {
-    alert('OK!');
-  });
-  
-
+    
 // ①送信先検索で非同期処理が開始
 // 仕様：送信先ボタンが押されたら、非同期処理を開始する
 // ajax非同期通信データを取得するように設定する
-$('destination-search').on('click', ()=>{
+$('destination').on('click', ()=>{
   $.ajax({
     type: "POST",
-    dataType:'json',
-    url:'data.json'})//階層場所の確認
+    url:'data.json',//階層場所の確認
+    async: true, // 非同期通信フラグの指定
+    dataType:'json'})
   .done((data)=>{
     // データがダウンロードできたときの処理
   })
