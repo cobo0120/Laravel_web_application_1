@@ -1,0 +1,1 @@
+テストメール<br><?php /**PATH /Applications/MAMP/htdocs/laravel_web_application/resources/views/emails/test.blade.php ENDPATH**/ ?>
