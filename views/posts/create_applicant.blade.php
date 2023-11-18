@@ -173,8 +173,8 @@
       <div class="modal-body">
           <form method="get" action=""  class="form-group col-2 my-4 " >
             @csrf
-            <input type="text" id="" name="search" class="form-control" placeholder="氏名検索" value="">
-            <button class="btn btn-success my-4" type="submit">検索する</button>
+            <input type="text" id="search-input" name="search" class="form-control"  placeholder="氏名検索" value="">
+            <button id="search-destination" class="btn btn-success my-4" data-bs-dismiss="null" data-backdrop="static">検索する</button>
           </form>
         
         
