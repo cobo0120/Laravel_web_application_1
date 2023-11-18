@@ -48,35 +48,51 @@ public function create_applicant(Request $request)
     $consumables = Consumable::all();
     $accounts = Account::all();
     // 検索機能の実装
-    $users=User::all();
+    // $users=User::all();
     // $search = $request->search;
     // $query = User::search($search);//クエリのローカルスコープ
     // $users = $query->select('id','name','department_id','email')->paginate(2);// idと購入先を検索画面をページネーションで表示されるページを調整（ここはいらない）
     // dd($users);
-    $user = User::where('name',$request->input)->get();
-    $param =['input'=>$request->input, 'user'=> $user];
-    return view('posts.create_applicant',compact('consumables','accounts','users','param'));
+    // $user = User::where('name',$request->input)->get();
+    // $param =['input'=>$request->input, 'user'=> $user];
+    return view('posts.create_applicant',compact('consumables','accounts'));
 }
 
 // テーブルデータを取得してビューに渡す
+public function data_destination(Request $request)
+{
+ 
+    // データを取得（1〜5件取ってくる）
+    $users = User::offset(($request->page-1)*3)->limit(3)->get();
+    $allUsers=User::all();
+    // データ数を取得
+    // $dataCount = count($allusers);
+    // ページ番号の最大値を取得
+    $pageMax = ceil(count($allUsers) / 3);
+    // // ページ番号を生成するための配列を作成
+    // $pageNumbers = [];
+    // // ページ番号を生成する
+    // for ($i = 1; $i <= $pageMax; $i++) {
+    // $pageNumbers[] = $i;
+    //   }
+    return response()->json([
+        'users' => $users,  
+        'pageMax' => $pageMax,]);
+    
+}
+
 public function search_destination(Request $request)
 {
 
-    $users = User::where('name',$request->input)->first();
-    $param =['input'=>$request->input, 'item'=> $users];
-    return view('posts.create_application',$param);
+     // リクエストから検索ワードを取得
+        $search = $request->input('search');
 
+        // Userモデルを使用してデータベースから検索
+        $results = User::where('name', 'like', "%{$search}%")->get();
+        
+        // レスポンスとしてJSONデータを返す
+        return response()->json($results);
 }
-
-// public function scopeApplicant(Request $request)
-// {
-
-//     $search = $request->search;
-//     $query = User::search($search);
-//     $users = $query->select('id','name','department_id','email')->paginate(2);// idと購入先を検索画面をページネーションで表示されるページを調整
-//     return view('posts.create_applicant',compact('consumables','accounts','users'));
-
-// }
 
 
 // public function getPageData(Request $request)
@@ -89,16 +105,16 @@ public function search_destination(Request $request)
 
 
 // 申請画面における送信先検索機能
-public function show_destination(Request $request)
-{
-    // $users= DB::select('select * from users');
-    $search = $request->search;
-    $query = User::search($search);//クエリのローカルスコープ
-    $users = $query->select('id','name','department_id','email')->paginate(2);// idと購入先を検索画面をページネーションで表示されるページを調整
+// public function show_destination(Request $request)
+// {
+//     // $users= DB::select('select * from users');
+//     $search = $request->search;
+//     $query = User::search($search);//クエリのローカルスコープ
+//     $users = $query->select('id','name','department_id','email')->paginate(2);// idと購入先を検索画面をページネーションで表示されるページを調整
     
-    return view('posts.show_destination',['users'=>$users]);
+//     return view('posts.show_destination',['users'=>$users]);
 
-}
+// }
 
 
 
@@ -242,7 +258,7 @@ public function edit_password(){
 
 
 
-
+// パスワードアップデート
 // public function update_password(Request $request)
 //      {
 //          $validatedData = $request->validate([
@@ -265,8 +281,8 @@ public function edit_password(){
 public function send()
 {
     $posts =Post::all();
-
-    $mailable = new SendTestMail($posts);
+    $user =User::all();
+    $mailable = new SendTestMail($posts,$user);
     // dd($mailable);
     Mail::send($mailable);
     return redirect()->route('posts');

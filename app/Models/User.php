@@ -53,6 +53,8 @@ class User extends Authenticatable
         return $this->belongsTo(Department::class);
     } 
 
+
+    // 検索機能の実装
     public function scopeSearch($query,$search)
     {
     if($search !== null){
