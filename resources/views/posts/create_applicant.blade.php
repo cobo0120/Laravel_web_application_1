@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{{ asset('/css/style.css')  }}" >
 <title>申請入力フォームの作成</title>
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+{{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 </head>
 
 
@@ -158,7 +158,7 @@
     
 
     <!-- モーダル機能ボタン -->
-   <button type="button" class="btn btn-primary" id="destination-search" data-bs-toggle="modal" data-bs-target="#staticBackdrop">送信先検索</button>
+   <button type="button" class="btn btn-primary destination" data-bs-toggle="modal" data-bs-target="#staticBackdrop">送信先検索</button>
 
     <!-- モーダル機能-->
   
@@ -173,8 +173,8 @@
       <div class="modal-body">
           <form method="get" action=""  class="form-group col-2 my-4 " >
             @csrf
-            <input type="text" id="" name="search" class="form-control" placeholder="氏名検索" value="">
-            <button class="btn btn-success my-4" type="submit">検索する</button>
+            <input type="text" id="search-input" name="search" class="form-control"  placeholder="氏名検索" value="">
+            <button id="search-destination" class="btn btn-success my-4" data-bs-dismiss="null" data-backdrop="static">検索する</button>
           </form>
         
         
@@ -188,8 +188,8 @@
                 <th>送信先選択</th>
               </tr>
             </thead>
-            <tbody>
-                 @foreach ($users as $user) 
+            <tbody id="destination_body">
+                 {{-- @foreach ($users as $user) 
                     <tr>
                     <td>{{$user->id}}</td>
                     <td>{{$user->name}}</td>
@@ -197,16 +197,16 @@
                     <td>{{$user->email}}</td>
                     {{-- 各項目へのリンク --}}
                 
-                    <td><button type="button" class="btn btn-secondary" onclick="choiceButton('{{$user->email}}')" data-bs-dismiss="modal">選択</button></td>
+                    {{-- <td><button type="button" class="btn btn-secondary" onclick="choiceButton('{{$user->email}}')" data-bs-dismiss="modal">選択</button></td>
                     </tr>
-                 @endforeach
+                 @endforeach --}}
             </tbody>
            </table>
         
-           <div class="row">
-            <button type="button" class="btn btn-primary add" data-bs-dismiss="modal">情報取得</button>
-            {{-- {{ $users->links() }} --}}
-           </div>
+           <div id="page-nate"></div>
+            {{-- <button  type="button" class="btn btn-primary add" data-bs-dismiss="modal"></button> --}}
+           
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
@@ -231,7 +231,7 @@
 </form>
 {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 <script src="{{ asset('/js/applicant.js') }}"></script>
-<script src="{{ asset('/js/destination.js') }}"></script>
+<script type="module" src="{{ asset('/js/destination.js') }}"></script>
 </body>
 </html>
 @endsection

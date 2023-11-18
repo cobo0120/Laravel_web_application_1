@@ -13,6 +13,7 @@
  
   <ul>
     <li>申請No:{{ $post['id'] }}</li>
+    <li>申請者:{{ $user['name'] }}</li>
     <li>発注日時：{{$post['created_at']}}</li>
     <li>発注金額小計：{{$post['subtotal']}}</li>
     <li>消費税：{{$post['tax_amount']}}</li>
