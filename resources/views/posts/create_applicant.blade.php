@@ -171,11 +171,10 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
          </div>
       <div class="modal-body">
-          <form method="get" action=""  class="form-group col-2 my-4 " >
-            @csrf
-            <input type="text" id="search-input" name="search" class="form-control"  placeholder="氏名検索" value="">
-            <button id="search-destination" class="btn btn-success my-4" data-bs-dismiss="null" data-backdrop="static">検索する</button>
-          </form>
+          <div class="form-group col-2 my-4 " > 
+            <input type="search" id="search-input" name="search" class="form-control"  placeholder="氏名検索" value="">
+            <button id="search-destination" class="btn btn-success my-4">検索する</button>
+          </div>
         
         
           <table class="table table-hover">
